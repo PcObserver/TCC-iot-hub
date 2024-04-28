@@ -1,15 +1,20 @@
-'use client';
+"use client";
 import Link from "next/link";
 import { Input } from "./input";
 import { FormEvent } from "react";
+import { SignInData, useAuthContext } from "@/contexts/auth";
 
+
+
+// @Abc123456
 export function LoginForm() {
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  const { signIn } = useAuthContext()
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const formData = new FormData(event.currentTarget)
-    const data = Object.fromEntries(formData)
-
-    console.log(data)
+    const data = Object.fromEntries(formData) as SignInData
+    signIn(data)
   }
 
   return (
