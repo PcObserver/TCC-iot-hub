@@ -1,3 +1,4 @@
+import SideBar from "@/components/SideBar";
 import { cookies } from "next/headers";
 import { permanentRedirect } from "next/navigation";
 
@@ -15,7 +16,10 @@ export default function Layout({
 
   return (
     <>
-      {children}
+      <SideBar />
+      <div className="p-4 sm:ml-72">
+        {children}
+      </div>
     </>
   )
 }
