@@ -24,7 +24,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   // @Abc123456
   async function signIn(data: SignInData) {
-    await api.post('/api/v1/users/log_in/', data, {
+    await api.post('/api/users/log_in/', data, {
       headers: {
         'Content-Type': 'application/json',
       }
@@ -36,6 +36,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
       setCookie('sessionToken', sessionToken, { expires });
       setCookie('refreshToken', refreshToken, { expires });
+      api.defaults.headers.authorization = `Bearer ${sessionToken}`;
 
       router.push('/dashboard')
     }).catch(() => {
@@ -46,7 +47,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   async function signOut() {
     const refreshToken = getCookie('refreshToken')
 
-    await api.post('/api/v1/users/log_out/', { refresh: refreshToken }, {
+    await api.post('/api/users/log_out/', { refresh: refreshToken }, {
       headers: {
         'Content-Type': 'application/json',
       }
