@@ -11,8 +11,15 @@ export type SignInData = {
   password: string;
 }
 
+export type RegisterData = {
+  email: string;
+  password: string;
+  password_confirmation: string;
+}
+
 type AuthContextType = {
   signIn: (data: SignInData) => Promise<void>
+  signUp: (data: RegisterData) => Promise<void>
   signOut: () => Promise<void>
 }
 
@@ -44,6 +51,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     })
   }
 
+  async function signUp(data: RegisterData) {
+    await api.post('/api/users/sign_up/', data, {
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    }).then(() => {
+      router.push('/login')
+      toast.success('Conta criada!')
+    }).catch(() => {
+      toast.error('Erro ao tentar cadastrar conta. Verifique as credenciais usadas')
+    })
+  }
+
   async function signOut() {
     const refreshToken = getCookie('refreshToken')
 
@@ -60,7 +80,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }
 
   return (
-    <AuthContext.Provider value={{ signIn, signOut }}>
+    <AuthContext.Provider value={{ signIn, signOut, signUp }}>
       {children}
     </AuthContext.Provider>
   )
