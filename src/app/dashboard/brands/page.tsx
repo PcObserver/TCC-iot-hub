@@ -53,6 +53,9 @@ export default async function Dashboard() {
                 <span className="text-md ml-2 mb-0 font-semibold text-gray-900 hover:text-black sm:mb-1.5 sm:text-xl">
                   {device.display_name}
                 </span>
+                {/* <span className="text-sm leading-normal text-gray-400 sm:block">
+                Detailed list of best practices to improve your frontend performance
+              </span> */}
               </Link>
             ))}
           </div>
