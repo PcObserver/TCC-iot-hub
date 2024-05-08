@@ -29,7 +29,7 @@ export default async function Dashboard() {
   console.log({ data: response.data })
   return (
     <>
-      <h1 className="mt-20 text-4xl font-bold">
+      <h1 className="mt-20 text-4xl font-bold pb-1 border-transparent border-b-primary border-4 max-w-fit">
         Ações
       </h1>
 
