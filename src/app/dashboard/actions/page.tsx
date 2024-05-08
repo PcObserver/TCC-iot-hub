@@ -29,7 +29,11 @@ export default async function Dashboard() {
   console.log({ data: response.data })
   return (
     <>
-      <div className="bg-gray-100 rounded-xl mt-24">
+      <h1 className="mt-20 text-4xl font-bold">
+        Ações
+      </h1>
+
+      <div className="bg-gray-100 rounded-xl mt-8">
 
         <form className=" ">
           <label htmlFor="default-search" className="mb-2 text-sm font-medium text-gray-900 sr-only">Search</label>
