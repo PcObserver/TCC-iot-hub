@@ -19,10 +19,15 @@ interface BrandResponse {
 }
 
 
-export default async function Dashboard() {
+interface BrandsProps {
+  searchParams: { [key: string]: string | string[] | undefined }
+}
+
+export default async function Brands({ searchParams }: BrandsProps) {
   const cookieStore = cookies()
   const token = `Bearer ${cookieStore.get('sessionToken')?.value}`
-  const response = await api.get<BrandResponse>('/api/devices/brands/', {
+  const endpoint = typeof searchParams.search === 'string' ? `/api/devices/brands/?display_name=${String(searchParams.search)}` : '/api/devices/brands/'
+  const response = await api.get<BrandResponse>(endpoint, {
     headers: {
       'Authorization': token
     }

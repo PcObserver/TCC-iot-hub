@@ -18,10 +18,16 @@ interface DeviceResponse {
   results: DeviceData[]
 }
 
-export default async function Dashboard() {
+
+interface DashboardProps {
+  searchParams: { [key: string]: string | string[] | undefined }
+}
+
+export default async function Dashboard({ searchParams }: DashboardProps) {
   const cookieStore = cookies()
   const token = `Bearer ${cookieStore.get('sessionToken')?.value}`
-  const response = await api.get<DeviceResponse>('/api/devices/devices/', {
+  const endpoint = typeof searchParams.search === 'string' ? `/api/devices/devices/?display_name=${String(searchParams.search)}` : '/api/devices/devices/'
+  const response = await api.get<DeviceResponse>(endpoint, {
     headers: {
       'Authorization': token
     }

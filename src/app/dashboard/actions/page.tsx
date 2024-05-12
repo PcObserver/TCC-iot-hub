@@ -19,11 +19,11 @@ interface ActionResponse {
 }
 
 
-interface DashboardProps {
+interface ActionsProps {
   searchParams: { [key: string]: string | string[] | undefined }
 }
 
-export default async function Dashboard({ searchParams }: DashboardProps) {
+export default async function Actions({ searchParams }: ActionsProps) {
   const cookieStore = cookies()
   const token = `Bearer ${cookieStore.get('sessionToken')?.value}`
   const endpoint = typeof searchParams.search === 'string' ? `/api/devices/actions/?name=${String(searchParams.search)}` : '/api/devices/actions/'
