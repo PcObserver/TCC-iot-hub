@@ -1,5 +1,6 @@
+import SearchBar from "@/components/SearchBar"
 import { api } from "@/services/api"
-import { Bot, Search } from "lucide-react"
+import { Bot } from "lucide-react"
 import { cookies } from "next/headers"
 import Link from "next/link"
 
@@ -18,11 +19,15 @@ interface ActionResponse {
 }
 
 
+interface DashboardProps {
+  searchParams: { [key: string]: string | string[] | undefined }
+}
 
-export default async function Dashboard() {
+export default async function Dashboard({ searchParams }: DashboardProps) {
   const cookieStore = cookies()
   const token = `Bearer ${cookieStore.get('sessionToken')?.value}`
-  const response = await api.get<ActionResponse>('/api/devices/actions/', {
+  const endpoint = typeof searchParams.search === 'string' ? `/api/devices/actions/?name=${String(searchParams.search)}` : '/api/devices/actions/'
+  const response = await api.get<ActionResponse>(endpoint, {
     headers: {
       'Authorization': token
     }
@@ -35,19 +40,9 @@ export default async function Dashboard() {
       </h1>
 
       <div className="bg-gray-100 rounded-xl mt-8">
-
-        <form className=" ">
-          <label htmlFor="default-search" className="mb-2 text-sm font-medium text-gray-900 sr-only">Search</label>
-          <div className="relative">
-            <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none text-gray-500">
-              <Search size={20} />
-            </div>
-            <input type="search" id="default-search" className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary focus:border-prring-primary " placeholder="Pesquise Sonoff, Shelly..." required />
-            <button type="submit" className="text-white absolute end-2.5 bottom-2.5 bg-primary hover:bg-primary-dark focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">Search</button>
-          </div>
-        </form>
-
+        <SearchBar placeholder="Pesquise Ligar, Desligar..." />
       </div>
+
       <div className="bg-gray-100 rounded-xl sm:p-8 mt-4">
         <div className="container mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
@@ -58,9 +53,6 @@ export default async function Dashboard() {
                 <span className="text-md ml-2 mb-0 font-semibold text-gray-900 hover:text-black sm:mb-1.5 sm:text-xl">
                   {device.name}
                 </span>
-                {/* <span className="text-sm leading-normal text-gray-400 sm:block">
-                Detailed list of best practices to improve your frontend performance
-              </span> */}
               </Link>
             ))}
           </div>
