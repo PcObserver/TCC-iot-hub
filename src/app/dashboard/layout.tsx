@@ -17,7 +17,7 @@ export default function Layout({
   return (
     <>
       <SideBar />
-      <div className="p-4 sm:ml-72">
+      <div className="p-8 sm:ml-72">
         {children}
       </div>
     </>

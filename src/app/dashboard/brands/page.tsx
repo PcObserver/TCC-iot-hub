@@ -3,33 +3,34 @@ import { Bot, Search } from "lucide-react"
 import { cookies } from "next/headers"
 import Link from "next/link"
 
-const mockData = {
-  data: [
-    {
-      id: 0,
-      display_name: 'Sonoff'
-    },
-    {
-      id: 1,
-      display_name: 'Shelly'
-    }
-  ]
+interface BrandData {
+  id: string
+  display_name: string
+  prefix: string
+  updated_at: string
+  createdd_at: string
 }
+interface BrandResponse {
+  count: number
+  next: string | null
+  previous: string | null
+  results: BrandData[]
+}
+
 
 export default async function Dashboard() {
   const cookieStore = cookies()
   const token = `Bearer ${cookieStore.get('sessionToken')?.value}`
-  // const response = await api.get('/api/devices/devices/', {
-  //   headers: {
-  //     'Authorization': token
-  //   }
-  // })
+  const response = await api.get<BrandResponse>('/api/devices/brands/', {
+    headers: {
+      'Authorization': token
+    }
+  })
 
-  const response = mockData
-  console.log({ data: response.data })
+  console.log({ data: response.data.results })
   return (
     <>
-      <h1 className="mt-20 text-4xl font-bold pb-1 border-transparent border-b-primary border-4 max-w-fit">
+      <h1 className="text-4xl font-bold pb-1 border-transparent border-b-primary border-4 max-w-fit">
         Marcas
       </h1>
 
@@ -50,7 +51,7 @@ export default async function Dashboard() {
       <div className="bg-gray-100 rounded-xl sm:p-8 mt-4">
         <div className="container mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
-            {response.data.map(device => (
+            {response?.data?.results?.map(device => (
               <Link href="#" key={device.id}
                 className="relative flex h-full rounded-md border border-gray-200 bg-white p-2.5 hover:border-gray-400 sm:rounded-lg sm:p-5">
                 <Bot />
