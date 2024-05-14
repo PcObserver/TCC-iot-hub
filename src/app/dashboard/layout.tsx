@@ -15,11 +15,11 @@ export default function Layout({
   }
 
   return (
-    <>
+    <div className="bg-[#FCFCFC]">
       <SideBar />
       <div className="p-8 sm:ml-72">
         {children}
       </div>
-    </>
+    </div>
   )
 }

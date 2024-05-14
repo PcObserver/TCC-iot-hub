@@ -1,4 +1,4 @@
-import { Bot, Factory, Wifi, Zap } from "lucide-react";
+import { Bot, Factory, Joystick, Wifi } from "lucide-react";
 import SideBarItem from "./SideBarItem";
 import SideBarLogout from "./SideBarLogout";
 
@@ -15,7 +15,7 @@ export default function SideBar() {
         <ul className="space-y-2 font-medium h-full pt-4">
           <SideBarItem label="Marcas" link="/dashboard/brands" Icon={Factory} />
           <SideBarItem label="Dispositivos" link="/dashboard" Icon={Bot} />
-          <SideBarItem label="Ações" link="/dashboard/actions" Icon={Zap} />
+          <SideBarItem label="Comandos" link="/dashboard/actions" Icon={Joystick} />
         </ul>
         <div className="space-y-2 font-medium">
           <SideBarLogout />
