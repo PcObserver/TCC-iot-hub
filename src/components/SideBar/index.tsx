@@ -10,7 +10,7 @@ export default function SideBar() {
           <div className="h-12 w-12 rounded-xl bg-secondary flex items-center justify-center ">
             <Wifi color="#417365" size={36} />
           </div>
-          <span className="text-white font-semibold text-lg">Lucas Digitador</span>
+          <span className="text-white font-semibold text-lg">Lucas Moreno</span>
         </div>
         <ul className="space-y-2 font-medium h-full pt-4">
           <SideBarItem label="Marcas" link="/dashboard/brands" Icon={Factory} />

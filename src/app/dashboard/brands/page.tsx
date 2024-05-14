@@ -28,7 +28,6 @@ export default async function Brands({ searchParams }: BrandsProps) {
     }
   })
 
-  console.log({ data: response.data.results })
   return (
     <>
       <h1 className="text-4xl font-bold pb-1 border-transparent border-b-primary border-4 max-w-fit">
