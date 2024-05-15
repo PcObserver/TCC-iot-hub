@@ -4,6 +4,8 @@ export interface DeviceData {
   parent_brand: string
   updated_at: string
   created_at: string
+  positive_reviews_count: string
+  actions_count: string
 }
 
 export interface BrandData {
@@ -12,6 +14,8 @@ export interface BrandData {
   prefix: string
   updated_at: string
   created_at: string
+  devices_count: string
+  positive_reviews_count: string
 }
 
 export interface ActionData {
@@ -20,5 +24,6 @@ export interface ActionData {
   payload: object
   updated_at: string
   created_at: string
+  positive_reviews_count: string
 }
 

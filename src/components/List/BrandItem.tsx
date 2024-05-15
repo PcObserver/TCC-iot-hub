@@ -5,11 +5,11 @@ import Link from "next/link"
 
 
 
-export default function BrandItem({ id, display_name, prefix, updated_at, created_at }: BrandData) {
+export default function BrandItem({ id, display_name, devices_count, updated_at, positive_reviews_count }: BrandData) {
   const lastUpdate = formatDate(updated_at)
   return (
     <div className="flex py-4 px-8 justify-between bg-white shadow-md items-center rounded-xl  ">
-      <div className="flex items-center gap-6 max-w-64">
+      <div className="flex items-center gap-6 min-w-[40%]">
         <Usb size={36} />
         <div className="w-full">
           <h3 className="font-semibold text-xl text-black">{display_name}</h3>
@@ -19,12 +19,12 @@ export default function BrandItem({ id, display_name, prefix, updated_at, create
 
       <div className="flex flex-col items-center">
         <p className="font-semibold text-xl">Num. disp</p>
-        <p className="text-lg">3</p>
+        <p className="text-lg">{devices_count}</p>
       </div>
 
       <div className="flex flex-col items-center">
         <p className="font-semibold text-xl">Num. likes</p>
-        <p className="text-lg">150</p>
+        <p className="text-lg">{positive_reviews_count}</p>
       </div>
 
       <Link href='#'>
