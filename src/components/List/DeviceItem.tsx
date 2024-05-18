@@ -7,9 +7,7 @@ import Link from "next/link"
 export default function DeviceItem({
   id,
   display_name,
-  parent_brand,
   actions_count,
-  created_at
 }: DeviceData) {
   return (
     <div className="flex py-4 px-8 justify-between bg-white shadow-md items-center rounded-xl  ">
@@ -25,7 +23,7 @@ export default function DeviceItem({
         <p className="text-lg">{actions_count}</p>
       </div>
 
-      <Link href='#'>
+      <Link href={`/dashboard/actions?device=${id}`}>
         Ver comandos
       </Link>
     </div >

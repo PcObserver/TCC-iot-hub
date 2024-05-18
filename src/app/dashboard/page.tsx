@@ -14,19 +14,29 @@ interface DeviceResponse {
 }
 
 
+type searchParamsType = { [key: string]: string | string[] | undefined }
 interface DashboardProps {
-  searchParams: { [key: string]: string | string[] | undefined }
+  searchParams: searchParamsType
+}
+
+function buildEndpoint(searchParams: searchParamsType) {
+  if (typeof searchParams.search !== 'string' && typeof searchParams.brand !== 'string') return '/api/devices/devices/'
+  if (typeof searchParams.search === 'string' && typeof searchParams.brand !== 'string') return `/api/devices/devices/?display_name=${String(searchParams.search)}`
+  if (typeof searchParams.search !== 'string' && typeof searchParams.brand === 'string') return `/api/devices/devices/?parent_brand=${String(searchParams.brand)}`
+  return `/api/devices/devices/?display_name=${String(searchParams.search)}&parent_brand=${String(searchParams.brand)}`
 }
 
 export default async function Dashboard({ searchParams }: DashboardProps) {
   const cookieStore = cookies()
   const token = `Bearer ${cookieStore.get('sessionToken')?.value}`
-  const endpoint = typeof searchParams.search === 'string' ? `/api/devices/devices/?display_name=${String(searchParams.search)}` : '/api/devices/devices/'
+  const endpoint = buildEndpoint(searchParams)
   const response = await api.get<DeviceResponse>(endpoint, {
     headers: {
       'Authorization': token
     }
   })
+
+  console.log(response?.data)
 
   return (
     <>

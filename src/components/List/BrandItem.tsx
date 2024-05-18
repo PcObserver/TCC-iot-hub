@@ -27,7 +27,7 @@ export default function BrandItem({ id, display_name, devices_count, updated_at,
         <p className="text-lg">{positive_reviews_count}</p>
       </div>
 
-      <Link href='#'>
+      <Link href={`/dashboard?brand=${id}`}>
         Ver dispositivos
       </Link>
     </div >

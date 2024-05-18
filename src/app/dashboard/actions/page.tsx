@@ -13,14 +13,22 @@ interface ActionResponse {
 }
 
 
+type searchParamsType = { [key: string]: string | string[] | undefined }
 interface ActionsProps {
-  searchParams: { [key: string]: string | string[] | undefined }
+  searchParams: searchParamsType
+}
+
+function buildEndpoint(searchParams: searchParamsType) {
+  if (typeof searchParams.search !== 'string' && typeof searchParams.device !== 'string') return '/api/devices/actions/'
+  if (typeof searchParams.search === 'string' && typeof searchParams.device !== 'string') return `/api/devices/actions/?name=${String(searchParams.search)}`
+  if (typeof searchParams.search !== 'string' && typeof searchParams.device === 'string') return `/api/devices/actions/?parent_device=${String(searchParams.device)}`
+  return `/api/devices/actions/?name=${String(searchParams.search)}&parent_device=${String(searchParams.device)}`
 }
 
 export default async function Actions({ searchParams }: ActionsProps) {
   const cookieStore = cookies()
   const token = `Bearer ${cookieStore.get('sessionToken')?.value}`
-  const endpoint = typeof searchParams.search === 'string' ? `/api/devices/actions/?name=${String(searchParams.search)}` : '/api/devices/actions/'
+  const endpoint = buildEndpoint(searchParams)
   const response = await api.get<ActionResponse>(endpoint, {
     headers: {
       'Authorization': token
