@@ -2,8 +2,8 @@
 import Select from "./base";
 
 const devices = [
-  { value: "sonoff", label: "Sonoff" },
-  { value: "shelly", label: "Shelly" },
+  { value: "sonoff_mini_r2", label: "Sonoff Mini R2" },
+  { value: "shelly_one_plus", label: "Shelly One Plus" },
 ]
 
 export function DeviceSelect(props: React.SelectHTMLAttributes<HTMLSelectElement>) {

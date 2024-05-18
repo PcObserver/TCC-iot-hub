@@ -44,8 +44,8 @@ export default async function Dashboard({ searchParams }: DashboardProps) {
 
       <div className="mt-8 container flex items-center gap-8">
         <SearchBar placeholder="Pesquise Mini R2, One plus..." />
-        <div className="w-60 flex justify-end">
-          <NavigateButton label="Cadastrar Dispositivo" href="" />
+        <div className="w-64 flex justify-end">
+          <NavigateButton label="Cadastrar Dispositivo" href="/dashboard/add" />
         </div>
       </div>
 
