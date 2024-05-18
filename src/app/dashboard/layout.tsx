@@ -1,4 +1,5 @@
 import SideBar from "@/components/SideBar";
+import UserName from "@/components/UserName";
 import { cookies } from "next/headers";
 import { permanentRedirect } from "next/navigation";
 
@@ -18,6 +19,9 @@ export default function Layout({
     <div className="bg-[#FCFCFC]">
       <SideBar />
       <div className="p-8 sm:ml-72">
+        <div className="flex justify-end mb-4">
+          <UserName />
+        </div>
         {children}
       </div>
     </div>
