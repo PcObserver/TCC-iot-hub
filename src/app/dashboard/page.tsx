@@ -36,8 +36,6 @@ export default async function Dashboard({ searchParams }: DashboardProps) {
     }
   })
 
-  console.log(response?.data)
-
   return (
     <>
       <h1 className="text-4xl font-bold pb-1 border-transparent border-b-primary border-4 max-w-fit">
