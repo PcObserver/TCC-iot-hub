@@ -1,4 +1,4 @@
-import Button from "@/components/Button"
+import NavigateButton from "@/components/NavigateButton"
 import List, { ActionItem } from "@/components/List"
 import SearchBar from "@/components/SearchBar"
 import { api } from "@/services/api"
@@ -27,6 +27,7 @@ export default async function Actions({ searchParams }: ActionsProps) {
     }
   })
 
+
   return (
     <>
       <h1 className="text-4xl font-bold pb-1 border-transparent border-b-primary border-4 max-w-fit">
@@ -36,7 +37,7 @@ export default async function Actions({ searchParams }: ActionsProps) {
       <div className="mt-8 container flex items-center gap-8">
         <SearchBar placeholder="Pesquise Ligar, Desligar...." />
         <div className="w-60 flex justify-end">
-          <Button label="Cadastrar Comando" />
+          <NavigateButton label="Cadastrar Comando" href="/dashboard/actions/add" />
         </div>
       </div>
 

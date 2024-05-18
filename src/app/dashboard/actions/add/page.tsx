@@ -1,4 +1,3 @@
-import Button from "@/components/Button";
 import { Input } from "@/components/form/input";
 import { DeviceSelect } from "@/components/form/select/DeviceSelect";
 import { MethodSelect } from "@/components/form/select/MethodSelect";
@@ -21,7 +20,9 @@ export default function AddAction() {
         <DeviceSelect required />
 
         <div className="flex justify-end mt-4">
-          <Button label="Cadastrar" />
+          <button className="bg-primary hover:bg-primary-dark py-3 px-6 rounded-md text-white">
+            Cadastrar
+          </button>
         </div>
       </form>
     </>

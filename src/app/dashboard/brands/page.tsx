@@ -1,4 +1,4 @@
-import Button from "@/components/Button"
+import NavigateButton from "@/components/NavigateButton"
 import List, { BrandItem } from "@/components/List"
 import SearchBar from "@/components/SearchBar"
 import { api } from "@/services/api"
@@ -37,7 +37,7 @@ export default async function Brands({ searchParams }: BrandsProps) {
       <div className="mt-8 container flex items-center gap-8">
         <SearchBar placeholder="Pesquise Sonoff, Shelly.." />
         <div className="w-60 flex justify-end">
-          <Button label="Cadastrar Marca" />
+          <NavigateButton label="Cadastrar Marca" href="" />
         </div>
       </div>
 

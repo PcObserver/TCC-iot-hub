@@ -1,4 +1,4 @@
-import Button from "@/components/Button"
+import NavigateButton from "@/components/NavigateButton"
 import List, { DeviceItem } from "@/components/List"
 import SearchBar from "@/components/SearchBar"
 import { api } from "@/services/api"
@@ -37,7 +37,7 @@ export default async function Dashboard({ searchParams }: DashboardProps) {
       <div className="mt-8 container flex items-center gap-8">
         <SearchBar placeholder="Pesquise Mini R2, One plus..." />
         <div className="w-60 flex justify-end">
-          <Button label="Cadastrar Dispositivo" />
+          <NavigateButton label="Cadastrar Dispositivo" href="" />
         </div>
       </div>
 
