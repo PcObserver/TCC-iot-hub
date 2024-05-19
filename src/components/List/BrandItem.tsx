@@ -27,9 +27,14 @@ export default function BrandItem({ id, display_name, devices_count, updated_at,
         <p className="text-lg">{positive_reviews_count}</p>
       </div>
 
-      <Link href={`/dashboard?brand=${id}`}>
-        Ver dispositivos
-      </Link>
+      <div className="flex flex-col items-center">
+        <Link href={`/dashboard?brand=${id}`}>
+          Ver dispositivos
+        </Link>
+        <Link href={`/dashboard/brands/edit?brand=${id}`}>
+          Editar
+        </Link>
+      </div>
     </div >
   )
 }

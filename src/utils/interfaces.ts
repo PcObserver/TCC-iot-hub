@@ -25,6 +25,11 @@ export interface BrandData {
   positive_reviews_count: string
 }
 
+export type AddBrandData = {
+  display_name: string
+  prefix: string
+}
+
 export interface ActionData {
   id: string
   name: string

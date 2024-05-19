@@ -1,5 +1,6 @@
 "use client";
 
+import ActionForm from "@/components/form/actionForm";
 import { Input } from "@/components/form/input";
 import { DeviceSelect } from "@/components/form/select/DeviceSelect";
 import { MethodSelect } from "@/components/form/select/MethodSelect";
@@ -29,20 +30,7 @@ export default function AddAction() {
         Cadastrar Comando
       </h1>
 
-      <form className="space-y-4 mt-8" onSubmit={handleSubmit}>
-        <Input name="name" label="Nome" placeholder="Ligar" required />
-        <MethodSelect required />
-        <ProtocolSelect required />
-        <Input name="route" label="Rota" placeholder="/example" required />
-        <Input name="payload" label="Payload" placeholder="{'example': 'test'}" required />
-        <DeviceSelect required />
-
-        <div className="flex justify-end mt-4">
-          <button type="submit" className="bg-primary hover:bg-primary-dark py-3 px-6 rounded-md text-white">
-            Cadastrar
-          </button>
-        </div>
-      </form>
+      <ActionForm handleSubmit={handleSubmit} />
     </>
   )
 }
