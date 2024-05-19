@@ -2,7 +2,7 @@ import NavigateButton from "@/components/NavigateButton"
 import List, { DeviceItem } from "@/components/List"
 import SearchBar from "@/components/SearchBar"
 import { api } from "@/services/api"
-import { DeviceData } from "@/utils/interfaces"
+import { DeviceData, searchParamsType } from "@/utils/interfaces"
 import { cookies } from "next/headers"
 
 
@@ -14,7 +14,7 @@ interface DeviceResponse {
 }
 
 
-type searchParamsType = { [key: string]: string | string[] | undefined }
+
 interface DashboardProps {
   searchParams: searchParamsType
 }

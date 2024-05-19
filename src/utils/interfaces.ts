@@ -8,6 +8,13 @@ export interface DeviceData {
   actions_count: string
 }
 
+export type AddDeviceData = {
+  display_name: string
+  prefix: string
+  parent_brand: string
+  description: string
+}
+
 export interface BrandData {
   id: string
   display_name: string
@@ -27,3 +34,5 @@ export interface ActionData {
   positive_reviews_count: string
 }
 
+
+export type searchParamsType = { [key: string]: string | string[] | undefined }

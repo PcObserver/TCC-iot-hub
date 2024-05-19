@@ -8,6 +8,7 @@ export default function DeviceItem({
   id,
   display_name,
   actions_count,
+  positive_reviews_count
 }: DeviceData) {
   return (
     <div className="flex py-4 px-8 justify-between bg-white shadow-md items-center rounded-xl  ">
@@ -23,9 +24,19 @@ export default function DeviceItem({
         <p className="text-lg">{actions_count}</p>
       </div>
 
-      <Link href={`/dashboard/actions?device=${id}`}>
-        Ver comandos
-      </Link>
+      <div className="flex flex-col items-center">
+        <p className="font-semibold text-xl">Num. likes</p>
+        <p className="text-lg">{positive_reviews_count}</p>
+      </div>
+
+      <div className="flex flex-col items-center">
+        <Link href={`/dashboard/actions?device=${id}`}>
+          Ver comandos
+        </Link>
+        <Link href={`/dashboard/edit?device=${id}`}>
+          Editar
+        </Link>
+      </div>
     </div >
   )
 }
