@@ -21,7 +21,7 @@ export default function ActionItem({ id, name, payload, updated_at, positive_rev
         <p className="text-lg">{positive_reviews_count}</p>
       </div>
 
-      <Link href='#'>
+      <Link href={`/dashboard/actions/edit?action=${id}`}>
         Ver detalhes
       </Link>
     </div >

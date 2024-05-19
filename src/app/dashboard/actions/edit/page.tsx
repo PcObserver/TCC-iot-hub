@@ -1,52 +1,53 @@
 "use client";
 
-import DeviceForm from "@/components/form/deviceForm";
-import { api } from "@/services/api";
-import { AddDeviceData, searchParamsType } from "@/utils/interfaces";
+import ActionForm from "@/components/form/actionForm";
+import { AddActionData, searchParamsType } from "@/utils/interfaces";
 import { getCookie } from "cookies-next";
 import { FormEvent, useEffect, useState } from "react";
+import { api } from "../../../../services/api";
 
 
-interface EditDeviceProps {
+interface EditActionProps {
   searchParams: searchParamsType
 }
 
-
-export default function EditDevice({ searchParams }: EditDeviceProps) {
-  const [data, setData] = useState({} as AddDeviceData)
+export default function EditAction({ searchParams }: EditActionProps) {
+  const [data, setData] = useState({} as AddActionData)
 
   useEffect(() => {
     const fetchData = async () => {
       const token = `Bearer ${getCookie('sessionToken')}`
-      const endpoint = typeof searchParams.device === 'string' ? `/api/devices/devices/${String(searchParams.device)}` : null
+      const endpoint = typeof searchParams.action === 'string' ? `/api/devices/actions/${String(searchParams.action)}` : null
 
       if (!endpoint) return
 
-      const response = await api.get<AddDeviceData>(endpoint, {
+      const response = await api.get<AddActionData>(endpoint, {
         headers: {
           'Authorization': token
         }
       })
 
+
       setData(response.data)
     }
 
     fetchData()
-  }, [searchParams.device])
+  }, [searchParams.action])
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const formData = new FormData(event.currentTarget)
-    const data = Object.fromEntries(formData) as AddDeviceData
+    const data = Object.fromEntries(formData) as AddActionData
     console.log({ data })
   }
 
   return (
     <>
       <h1 className="text-4xl font-bold pb-1 border-transparent border-b-primary border-4 max-w-fit">
-        Atualizar Dispositivo
+        Atualizar Comando
       </h1>
-      <DeviceForm handleSubmit={handleSubmit} defaultData={data} buttonLabel="Atualizar" />
+
+      <ActionForm handleSubmit={handleSubmit} defaultData={data} buttonLabel="Atualizar" />
     </>
   )
 }

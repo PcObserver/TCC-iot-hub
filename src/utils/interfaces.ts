@@ -34,5 +34,14 @@ export interface ActionData {
   positive_reviews_count: string
 }
 
+export type AddActionData = {
+  name: string
+  method: string
+  protocol: string
+  payload: string
+  device: string
+}
+
+
 
 export type searchParamsType = { [key: string]: string | string[] | undefined }
