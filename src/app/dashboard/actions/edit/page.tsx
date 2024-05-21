@@ -7,6 +7,7 @@ import { FormEvent, useEffect, useState } from "react";
 import { api } from "../../../../services/api";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { removeEmptyValues } from "@/utils";
 
 
 interface EditActionProps {
@@ -42,7 +43,17 @@ export default function EditAction({ searchParams }: EditActionProps) {
     event.preventDefault()
     const formData = new FormData(event.currentTarget)
     const data = Object.fromEntries(formData) as AddActionData
-    console.log({ data })
+
+    await api.patch(`/api/devices/actions/${actionId}/`, removeEmptyValues(data), {
+      headers: {
+        'Authorization': token
+      }
+    }).then(() => {
+      toast.success('Comando atulizado!')
+      router.push('/dashboard/actions')
+    }).catch(() => {
+      toast.error('Erro ao atualizar comando.')
+    })
   }
 
   const handleDelete = async () => {
@@ -65,11 +76,10 @@ export default function EditAction({ searchParams }: EditActionProps) {
       </h1>
 
       <ActionForm
+        type='edit'
         handleSubmit={handleSubmit}
-        defaultData={data}
-        buttonLabel="Atualizar"
-        enableDelete
         handleDelete={handleDelete}
+        defaultData={data}
       />
     </>
   )

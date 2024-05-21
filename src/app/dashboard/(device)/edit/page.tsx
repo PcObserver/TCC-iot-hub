@@ -2,6 +2,7 @@
 
 import DeviceForm from "@/components/form/deviceForm";
 import { api } from "@/services/api";
+import { removeEmptyValues } from "@/utils";
 import { AddDeviceData, searchParamsType } from "@/utils/interfaces";
 import { getCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
@@ -41,7 +42,17 @@ export default function EditDevice({ searchParams }: EditDeviceProps) {
     event.preventDefault()
     const formData = new FormData(event.currentTarget)
     const data = Object.fromEntries(formData) as AddDeviceData
-    console.log({ data })
+
+    await api.patch(`/api/devices/devices/${deviceId}/`, removeEmptyValues(data), {
+      headers: {
+        'Authorization': token
+      }
+    }).then(() => {
+      toast.success('Dispositivo atulizado!')
+      router.push('/dashboard')
+    }).catch(() => {
+      toast.error('Erro ao atualizar dispositivo.')
+    })
   }
 
 
@@ -63,11 +74,10 @@ export default function EditDevice({ searchParams }: EditDeviceProps) {
         Atualizar Dispositivo
       </h1>
       <DeviceForm
+        type='edit'
         handleSubmit={handleSubmit}
-        defaultData={data}
-        buttonLabel="Atualizar"
-        enableDelete
         handleDelete={handleDelete}
+        defaultData={data}
       />
     </>
   )

@@ -7,6 +7,7 @@ import { api } from "../../../../services/api";
 import BrandForm from "@/components/form/brandForm";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { removeEmptyValues } from "@/utils";
 
 
 interface EditBrandProps {
@@ -42,7 +43,17 @@ export default function EditBrand({ searchParams }: EditBrandProps) {
     event.preventDefault()
     const formData = new FormData(event.currentTarget)
     const data = Object.fromEntries(formData) as AddActionData
-    console.log({ data })
+
+    await api.patch(`/api/devices/brands/${brandId}/`, removeEmptyValues(data), {
+      headers: {
+        'Authorization': token
+      }
+    }).then(() => {
+      toast.success('Marca atulizada!')
+      router.push('/dashboard/brands')
+    }).catch(() => {
+      toast.error('Erro ao atualizar marca.')
+    })
   }
 
   const handleDelete = async () => {
@@ -65,11 +76,10 @@ export default function EditBrand({ searchParams }: EditBrandProps) {
       </h1>
 
       <BrandForm
+        type='edit'
         handleSubmit={handleSubmit}
-        defaultData={data}
-        buttonLabel="Atualizar"
-        enableDelete
         handleDelete={handleDelete}
+        defaultData={data}
       />
     </>
   )
