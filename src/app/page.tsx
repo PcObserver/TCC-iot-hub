@@ -14,7 +14,7 @@ export default function Home() {
       />
       <div className="w-[20%] text-center">
         <div className="mb-8">
-          <h1 className="text-white text-pretty text-lg font-bold text-[2.5em] mb-4 leading-10">Bem vindo(a) ao Elegos!</h1>
+          <h1 className="text-white text-pretty font-bold text-[2.5em] mb-4 leading-10">Bem vindo(a) ao Elegos!</h1>
           <h2 className="text-white text-[1em]">Diga adeus à confusão de ter que alternar entre dezenas de aplicativos para controlar seus dispositivos!</h2>
         </div>
         <Link href="/login">
