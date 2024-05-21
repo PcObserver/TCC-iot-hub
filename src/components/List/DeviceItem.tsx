@@ -2,7 +2,7 @@ import { DeviceData } from "@/utils/interfaces"
 import { Bot } from "lucide-react"
 import Link from "next/link"
 import Dropdown from "../Dropdown"
-import { Menu, MenuButton, MenuItems, MenuItem, Transition } from '@headlessui/react'
+import { MenuItem } from '@headlessui/react'
 
 
 export default function DeviceItem({
