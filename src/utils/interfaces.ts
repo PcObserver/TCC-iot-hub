@@ -33,7 +33,11 @@ export type AddBrandData = {
 export interface ActionData {
   id: string
   name: string
+  method: string
+  protocol: string
   payload: object
+  path: string
+  description: string
   updated_at: string
   created_at: string
   positive_reviews_count: string
@@ -44,7 +48,9 @@ export type AddActionData = {
   method: string
   protocol: string
   payload: string
-  device: string
+  path: string
+  parent_device: string
+  description: string
 }
 
 
