@@ -5,6 +5,8 @@ import { AddActionData, searchParamsType } from "@/utils/interfaces";
 import { getCookie } from "cookies-next";
 import { FormEvent, useEffect, useState } from "react";
 import { api } from "../../../../services/api";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 
 interface EditActionProps {
@@ -13,11 +15,13 @@ interface EditActionProps {
 
 export default function EditAction({ searchParams }: EditActionProps) {
   const [data, setData] = useState({} as AddActionData)
+  const router = useRouter()
+  const actionId = String(searchParams.action)
+  const token = `Bearer ${getCookie('sessionToken')}`
 
   useEffect(() => {
     const fetchData = async () => {
-      const token = `Bearer ${getCookie('sessionToken')}`
-      const endpoint = typeof searchParams.action === 'string' ? `/api/devices/actions/${String(searchParams.action)}` : null
+      const endpoint = typeof searchParams.action === 'string' ? `/api/devices/actions/${actionId}` : null
 
       if (!endpoint) return
 
@@ -32,7 +36,7 @@ export default function EditAction({ searchParams }: EditActionProps) {
     }
 
     fetchData()
-  }, [searchParams.action])
+  }, [searchParams.action, actionId, token])
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -41,13 +45,32 @@ export default function EditAction({ searchParams }: EditActionProps) {
     console.log({ data })
   }
 
+  const handleDelete = async () => {
+    await api.delete(`/api/devices/actions/${actionId}/`, {
+      headers: {
+        'Authorization': token
+      }
+    }).then(() => {
+      toast.success('Comando deletado!')
+      router.push('/dashboard/actions')
+    }).catch(() => {
+      toast.error('Erro ao tentar deletar comando.')
+    })
+  }
+
   return (
     <>
       <h1 className="text-4xl font-bold pb-1 border-transparent border-b-primary border-4 max-w-fit">
         Atualizar Comando
       </h1>
 
-      <ActionForm handleSubmit={handleSubmit} defaultData={data} buttonLabel="Atualizar" />
+      <ActionForm
+        handleSubmit={handleSubmit}
+        defaultData={data}
+        buttonLabel="Atualizar"
+        enableDelete
+        handleDelete={handleDelete}
+      />
     </>
   )
 }

@@ -5,11 +5,13 @@ import { AddDeviceData } from "@/utils/interfaces";
 
 interface DeviceFormProps {
   handleSubmit: (event: FormEvent<HTMLFormElement>) => Promise<void>
+  handleDelete?: () => Promise<void>
+  enableDelete?: boolean
   buttonLabel?: string
   defaultData?: AddDeviceData
 }
 
-export default function DeviceForm({ handleSubmit, buttonLabel, defaultData }: DeviceFormProps) {
+export default function DeviceForm({ handleSubmit, buttonLabel, defaultData, enableDelete, handleDelete }: DeviceFormProps) {
 
   return (
     <form className="space-y-4 mt-8" onSubmit={handleSubmit}>
@@ -18,7 +20,12 @@ export default function DeviceForm({ handleSubmit, buttonLabel, defaultData }: D
       <BrandSelect required defaultValue={defaultData?.parent_brand} />
       <Input name="description" label="Descrição" defaultValue={defaultData?.description} placeholder="Detalhes..." required />
 
-      <div className="flex justify-end mt-4">
+      <div className="flex justify-end mt-4 gap-4">
+        {enableDelete && (
+          <button type="button" onClick={handleDelete} className="text-red-500 hover:text-white border border-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm text-center  py-3 px-6">
+            Deletar
+          </button>
+        )}
         <button type="submit" className="bg-primary hover:bg-primary-dark py-3 px-6 rounded-md text-white">
           {buttonLabel ?? 'Cadastrar'}
         </button>

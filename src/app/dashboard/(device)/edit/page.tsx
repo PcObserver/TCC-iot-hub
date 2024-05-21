@@ -4,8 +4,9 @@ import DeviceForm from "@/components/form/deviceForm";
 import { api } from "@/services/api";
 import { AddDeviceData, searchParamsType } from "@/utils/interfaces";
 import { getCookie } from "cookies-next";
+import { useRouter } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
-
+import { toast } from "sonner";
 
 interface EditDeviceProps {
   searchParams: searchParamsType
@@ -14,11 +15,13 @@ interface EditDeviceProps {
 
 export default function EditDevice({ searchParams }: EditDeviceProps) {
   const [data, setData] = useState({} as AddDeviceData)
+  const router = useRouter()
+  const deviceId = String(searchParams.device)
+  const token = `Bearer ${getCookie('sessionToken')}`
 
   useEffect(() => {
     const fetchData = async () => {
-      const token = `Bearer ${getCookie('sessionToken')}`
-      const endpoint = typeof searchParams.device === 'string' ? `/api/devices/devices/${String(searchParams.device)}` : null
+      const endpoint = typeof searchParams.device === 'string' ? `/api/devices/devices/${deviceId}` : null
 
       if (!endpoint) return
 
@@ -32,7 +35,7 @@ export default function EditDevice({ searchParams }: EditDeviceProps) {
     }
 
     fetchData()
-  }, [searchParams.device])
+  }, [searchParams.device, deviceId, token])
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -41,12 +44,31 @@ export default function EditDevice({ searchParams }: EditDeviceProps) {
     console.log({ data })
   }
 
+
+  const handleDelete = async () => {
+    await api.delete(`/api/devices/devices/${deviceId}/`, {
+      headers: {
+        'Authorization': token
+      }
+    }).then(() => {
+      toast.success('Dispositivo deletado!')
+      router.push('/dashboard')
+    }).catch(() => {
+      toast.error('Erro ao tentar deletar dispositivo.')
+    })
+  }
   return (
     <>
       <h1 className="text-4xl font-bold pb-1 border-transparent border-b-primary border-4 max-w-fit">
         Atualizar Dispositivo
       </h1>
-      <DeviceForm handleSubmit={handleSubmit} defaultData={data} buttonLabel="Atualizar" />
+      <DeviceForm
+        handleSubmit={handleSubmit}
+        defaultData={data}
+        buttonLabel="Atualizar"
+        enableDelete
+        handleDelete={handleDelete}
+      />
     </>
   )
 }
