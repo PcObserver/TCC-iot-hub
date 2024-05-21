@@ -16,11 +16,11 @@ export default function ActionForm({ handleSubmit, buttonLabel, defaultData }: A
   return (
     <form className="space-y-4 mt-8" onSubmit={handleSubmit}>
       <Input name="name" label="Nome" defaultValue={defaultData?.name} placeholder="Ligar" required />
-      <MethodSelect required />
-      <ProtocolSelect required />
-      <Input name="path" label="Path" placeholder="/example" required />
+      <MethodSelect required defaultValue={defaultData?.method} />
+      <ProtocolSelect required defaultValue={defaultData?.protocol} />
+      <Input name="path" label="Path" defaultValue={defaultData?.path} placeholder="/example" required />
       <Input name="payload" label="Payload" defaultValue={JSON.stringify(defaultData?.payload)} placeholder="{'example': 'test'}" required />
-      <DeviceSelect required />
+      <DeviceSelect required defaultValue={defaultData?.parent_device} />
       <Input name="description" label="Descrição" defaultValue={JSON.stringify(defaultData?.description)} placeholder="Descrição do comando" required />
 
       <div className="flex justify-end mt-4">
