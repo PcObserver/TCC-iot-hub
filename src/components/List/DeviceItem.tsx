@@ -2,7 +2,7 @@ import { DeviceData } from "@/utils/interfaces"
 import { Bot } from "lucide-react"
 import Link from "next/link"
 import Dropdown from "../Dropdown"
-
+import { Menu, MenuButton, MenuItems, MenuItem, Transition } from '@headlessui/react'
 
 
 export default function DeviceItem({
@@ -32,18 +32,19 @@ export default function DeviceItem({
 
       <div className="flex flex-col items-center">
         <Dropdown>
-          <li>
-            <Link href={`/dashboard/actions?device=${id}`} className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+          <MenuItem>
+            <Link href={`/dashboard/actions?device=${id}`} className="text-gray-700 block px-4 py-2 text-sm">
               Ver comandos
             </Link>
-          </li>
-          <li>
-            <Link href={`/dashboard/edit?device=${id}`} className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+          </MenuItem>
+          <MenuItem>
+            <Link href={`/dashboard/edit?device=${id}`} className="text-gray-700 block px-4 py-2 text-sm">
               Editar
             </Link>
-          </li>
+          </MenuItem>
         </Dropdown>
       </div>
     </div >
   )
 }
+
