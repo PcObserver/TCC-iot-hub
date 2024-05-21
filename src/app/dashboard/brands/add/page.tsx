@@ -7,10 +7,12 @@ import { getCookie } from "cookies-next";
 import { FormEvent } from "react";
 import { api } from "@/services/api";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 
 
 export default function AddBrand() {
+  const router = useRouter()
   const token = `Bearer ${getCookie('sessionToken')}`
   const decoded = jwtDecode(token) as { user_id: string };
   const userId = decoded?.user_id
@@ -27,6 +29,7 @@ export default function AddBrand() {
       }
     }).then(() => {
       toast.success('Marca criada!')
+      router.push('/dashboard/brands')
     }).catch(() => {
       toast.error('Erro ao tentar criar marca.')
     })
