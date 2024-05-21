@@ -1,6 +1,7 @@
 import { DeviceData } from "@/utils/interfaces"
 import { Bot } from "lucide-react"
 import Link from "next/link"
+import Dropdown from "../Dropdown"
 
 
 
@@ -30,12 +31,18 @@ export default function DeviceItem({
       </div>
 
       <div className="flex flex-col items-center">
-        <Link href={`/dashboard/actions?device=${id}`}>
-          Ver comandos
-        </Link>
-        <Link href={`/dashboard/edit?device=${id}`}>
-          Editar
-        </Link>
+        <Dropdown>
+          <li>
+            <Link href={`/dashboard/actions?device=${id}`} className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+              Ver comandos
+            </Link>
+          </li>
+          <li>
+            <Link href={`/dashboard/edit?device=${id}`} className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+              Editar
+            </Link>
+          </li>
+        </Dropdown>
       </div>
     </div >
   )
