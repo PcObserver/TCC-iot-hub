@@ -27,7 +27,7 @@ export function RegisterForm() {
       <Input name="password" label="Senha" type="password" placeholder="••••••••" required />
       <Input name="password_confirmation" label="Confirme a Senha" type="password" placeholder="••••••••" required />
 
-      <button type="submit" className="w-full text-white bg-primary hover:bg-primary-dark focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Criar conta</button>
+      <button type="submit" className="w-full text-white bg-yellow-primary hover:bg-slate-300 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Criar conta</button>
       <p className="text-sm font-light text-gray-500">
         Já possui uma conta? <Link href="/login" className="font-medium text-primary-600 hover:underline">Login</Link>
       </p>
