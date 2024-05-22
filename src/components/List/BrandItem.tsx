@@ -2,7 +2,8 @@ import formatDate from "@/utils/date"
 import { BrandData } from "@/utils/interfaces"
 import { Usb } from "lucide-react"
 import Link from "next/link"
-
+import Dropdown from "../Dropdown"
+import { MenuItem } from '@headlessui/react'
 
 
 export default function BrandItem({ id, display_name, devices_count, updated_at, positive_reviews_count }: BrandData) {
@@ -28,12 +29,18 @@ export default function BrandItem({ id, display_name, devices_count, updated_at,
       </div>
 
       <div className="flex flex-col items-center">
-        <Link href={`/dashboard?brand=${id}`}>
-          Ver dispositivos
-        </Link>
-        <Link href={`/dashboard/brands/edit?brand=${id}`}>
-          Editar
-        </Link>
+        <Dropdown>
+          <MenuItem>
+            <Link href={`/dashboard?brand=${id}`} className="text-gray-700 block px-4 py-2 text-sm">
+              Ver dispositivos
+            </Link>
+          </MenuItem>
+          <MenuItem>
+            <Link href={`/dashboard/brands/edit?brand=${id}`} className="text-gray-700 block px-4 py-2 text-sm">
+              Editar
+            </Link>
+          </MenuItem>
+        </Dropdown>
       </div>
     </div >
   )
