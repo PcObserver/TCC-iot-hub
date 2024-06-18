@@ -18,19 +18,41 @@ Este repositório consiste na implementação do Front-end da comunidade de disp
 
 - TypeScript
 - Next.js 14
+- Tailwind CSS
 
 ## Configuração do Projeto
 
-### TODO
+### Pré-requisitos
+Antes de começar, certifique-se de que tem os seguintes softwares instalados:
 
-First, run the development server:
+- Node.js (versão 16.x ou superior)
+- npm (gerenciadores de pacotes recomendados)
+  
+Você pode baixar e instalar o Node.js e npm a partir do [nodejs.org](https://nodejs.org/en). Alternativamente, você pode usar o [nvm](https://github.com/nvm-sh/nvm) para gerenciar as versões do Node.js.
+
+### 1. Clonar o Repositório
+
+Clone o repositório para sua máquina local:
+
+```bash
+git clone https://github.com/PcObserver/TCC-iot-hub/tree/main
+cd TCC-iot-hub
+```
+
+### 2. Instalar Dependências
+
+Instale as dependências do projeto usando npm:
+
+```bash
+npm install
+```
+
+### 3. Executar o Servidor de Desenvolvimento
+
+Inicie o servidor de desenvolvimento:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
+
+A aplicação agora deve estar rodando em http://localhost:3000 🚀.
